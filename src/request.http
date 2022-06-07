@@ -9,8 +9,8 @@ content-type: application/json
 {
     "visitante": "Internacional",
     "casa": "Grêmio",
-    "placar_visitante": 0,
-    "placar_casa": 10
+    "placarVisitante": 0,
+    "placarCasa": 10
 }
 ###
 
