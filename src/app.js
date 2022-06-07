@@ -1,10 +1,10 @@
 const express = require('express')
-const app = express()
+export const app = express()
 const port = 3000
 
 const { randomUUID } = require('crypto')
 
-const partidas = []
+export let partidas = []
 
 app.use(express.json())
 
@@ -13,9 +13,9 @@ app.get('/partidas', (req, res) => {
 })
 
 app.post('/partidas', function (req, res) {
-  const { casa, visitante, placar_casa, placar_visitante } = req.body
+  const { casa, visitante, placarCasa, placarVisitante } = req.body
 
-  const partida = { casa, visitante, placar_casa, placar_visitante, id: randomUUID() }
+  const partida = { casa, visitante, placarCasa, placarVisitante, id: randomUUID() }
 
   partidas.push(partida)
 
