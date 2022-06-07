@@ -1,0 +1,28 @@
+GET http://localhost:3000/partidas HTTP/1.1
+content-type: application/json
+###
+
+
+POST http://localhost:3000/partidas HTTP/1.1
+content-type: application/json
+
+{
+    "visitante": "Internacional",
+    "casa": "Grêmio",
+    "placar_visitante": 0,
+    "placar_casa": 10
+}
+###
+
+
+PUT http://localhost:3000/partidas/9e9137c0-d696-4c9e-88ce-f8eba6868294 HTTP/1.1
+content-type: application/json
+
+{
+    "visitante": "Palmeiras"
+}
+###
+
+
+DELETE  http://localhost:3000/partidas/7da60c54-270e-48dd-b92d-0f8dfd9dad6e HTTP/1.1
+content-type: application/json
