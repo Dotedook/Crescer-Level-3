@@ -1,0 +1,33 @@
+{
+  "name": "desafio-crud",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "env-cmd -f .env.local nodemon --exec babel-node ./src/app.js",
+    "test": "jest --coverage ./test",
+    "pm2:dev": "env-cmd -f .env.dev pm2-runtime ./build/app.js",
+    "pm2:hml": "env-cmd -f .env.hml pm2-runtime ./build/app.js",
+    "pm2:prd": "env-cmd -f .env.prod pm2-runtime ./build/app.js"
+  },
+  "author": "Crescidos da Cogna",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "7.16.0",
+    "@babel/core": "7.16.0",
+    "@babel/node": "7.16.0",
+    "@babel/preset-env": "7.16.4",
+    "babel-eslint": "10.1.0",
+    "babel-plugin-module-resolver": "4.1.0",
+    "eslint": "7.32.0",
+    "jest": "27.4.5",
+    "nodemon": "2.0.15"
+  },
+  "dependencies": {
+    "env-cmd": "10.1.0",
+    "express": "4.17.1",
+    "express-validator": "6.14.0",
+    "swagger-ui-express": "4.3.0",
+    "yamljs": "0.3.0"
+  }
+}
