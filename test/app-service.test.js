@@ -3,7 +3,8 @@ let api
 let partidaPadrao
 
 beforeEach(() => {
-  const { app, partidas } = require('../src/app')
+  const { app } = require('../src/app')
+  const { partidas } = require('../src/app-repository')
   partidas.splice(0, partidas.length)
   api = app
   partidaPadrao = {
@@ -98,6 +99,23 @@ describe('Testes chamada PUT', () => {
     expect(partidaRecebidaSemId).toEqual(novaPartida)
     expect(responseGet.body[0].id).toEqual(idPartida)
   })
+
+  test('Deve lançar erro se não houver nenhuma partida com o ID informado', async () => {
+    const novaPartida = {
+      visitante: 'Palmeiras',
+      casa: 'Vasco Da Gama',
+      placarVisitante: 8,
+      placarCasa: 10,
+    }
+    const idPartida = 0
+    const statusEsperado = 404
+    const mensagemEsperada = 'Partida não encontrada'
+
+    const responsePut = await request(api).put(`/partidas/${idPartida}`).send(novaPartida)
+
+    expect(responsePut.status).toEqual(statusEsperado)
+    expect(responsePut.text).toBe(mensagemEsperada)
+  })
 })
 
 describe('Testes chamada DELETE', () => {
@@ -112,5 +130,16 @@ describe('Testes chamada DELETE', () => {
 
     expect(responseDel.status).toBe(statusEsperado)
     expect(responseGet.body.length).toEqual(tamanhoEsperado)
+  })
+
+  test('Deve lançar erro se não houver nenhuma partida com o ID informado', async () => {
+    const idPartida = 0
+    const statusEsperado = 404
+    const mensagemEsperada = 'Partida não encontrada'
+
+    const responseDel = await request(api).del(`/partidas/${idPartida}`)
+
+    expect(responseDel.status).toEqual(statusEsperado)
+    expect(responseDel.text).toBe(mensagemEsperada)
   })
 })
