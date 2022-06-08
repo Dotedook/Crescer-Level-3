@@ -1,48 +1,27 @@
+import { getPartidas, criarPartida, editarPartida, deletarPartida } from './app-service'
+
 const express = require('express')
 export const app = express()
 const port = 3000
 
-const { randomUUID } = require('crypto')
-
-export let partidas = []
-
 app.use(express.json())
 
 app.get('/partidas', (req, res) => {
-  res.send(partidas)
+  res.send(getPartidas())
 })
 
-app.post('/partidas', function (req, res) {
-  const { casa, visitante, placarCasa, placarVisitante } = req.body
-
-  const partida = { casa, visitante, placarCasa, placarVisitante, id: randomUUID() }
-
-  partidas.push(partida)
-
-  res.json(partida)
+app.post('/partidas', (req, res) => {
+  res.send(criarPartida(req))
 })
 
-app.put('/partidas/:id', function (req, res) {
-  const { id } = req.params
-
-  const indexPartida = partidas.findIndex(partida => id === partida.id)
-
-  partidas[indexPartida] = { ...partidas[indexPartida], ...req.body }
-
-  
-  res.send(partidas[indexPartida])
+app.put('/partidas/:id', (req, res) => {
+  res.send(editarPartida(req, res))
 })
 
-app.delete('/partidas/:id', function (req, res) {
-  const { id } = req.params
-
-  const indexPartida = partidas.findIndex(partida => id === partida.id)
-
-  partidas.splice(indexPartida, 1)
-
-  res.send(partidas)
+app.delete('/partidas/:id', (req, res) => {
+  res.send(deletarPartida(req, res))
 })
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Aplicação executando na porta ${port}`)
 })
