@@ -53,7 +53,15 @@ O CreFUT é uma aplicação feita em NODE.JS para controle e manutenção de pla
 ### Criação de partida
 
 Para criar uma partida é necessário seguir o modelo de objeto abaixo.</br>
-`{`</br>`"visitante": "Internacional",`</br>`"casa": "Grêmio",`</br>`"placarVisitante": 0,`</br>`"placarCasa": 10`</br>` }`
+````json
+{
+    "visitante": "Internacional",
+    "casa": "Grêmio",
+    "placarVisitante": 0,
+    "placarCasa": 10
+}
+````
+
 
 ### Edição de partida
 
