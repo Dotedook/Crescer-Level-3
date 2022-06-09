@@ -7,16 +7,16 @@ POST http://localhost:3000/partidas HTTP/1.1
 content-type: application/json
 
 {
-    "data": "09/06/2022",
+    "data": "2020/05/05",
     "esporte": "Futebol",
     "casa": {
       "time": "Brasil",
-      "pontuacao": 2,
+      "pontuacao": 2
     },
     "visitante": {
       "time": "Alemanha",
-      "pontuacao": 0,
-    }
+      "pontuacao": "0"
+  }
 }
 ###
 

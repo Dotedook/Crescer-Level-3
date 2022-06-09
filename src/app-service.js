@@ -8,7 +8,11 @@ export const getPartidas = (req, res) => {
 }
 
 export const criarPartida = (req, res) => {
-  res.send('DALE')
+  const novaPartida = { id: randomUUID(), ...req.body }
+
+  partidas.push(novaPartida)
+
+  res.send(req.body)
 }
 
 export const editarPartida = (req, res) => {
@@ -31,7 +35,6 @@ export const deletarPartida = (req, res) => {
 }
 
 export const validarSchema = (req, res, next) => {
-  console.log(req)
   const erros = validationResult(req)
   if (!erros.isEmpty()) {
     return res.status(400).json({ errors: erros.array() })
