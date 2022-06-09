@@ -1,12 +1,7 @@
 export const schemaExcluirPartida = {
   id: {
-    custom: {
-      options: (_, { location }) => {
-        if (location !== 'params') {          
-          throw new Error('O ID deve vir como parâmetro para excluir uma partida!')
-        }
-        return true
-      }
-    }
+    in: ['body', 'headers', 'cookies', 'query'],
+    isEmpty: true,
+    errorMessage: 'O ID deve vir como parâmetro para excluir uma partida!'
   }
 }

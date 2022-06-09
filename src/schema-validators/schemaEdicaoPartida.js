@@ -24,13 +24,8 @@ export const schemaEdicaoPartida = {
     toInt: true
   },
   id: {
-    custom: {
-      options: (value, { location }) => {
-        if (location !== 'params') {          
-          throw new Error('O ID deve vir como parâmetro para excluir uma partida!')
-        }
-        return true
-      }
-    }
+    in: ['body', 'headers', 'cookies', 'query'],
+    isEmpty: true,
+    errorMessage: 'O ID deve vir como parâmetro para editar uma partida!'
   }
 }

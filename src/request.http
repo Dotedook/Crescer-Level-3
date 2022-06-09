@@ -15,16 +15,16 @@ content-type: application/json
 ###
 
 
-PUT http://localhost:3000/partidas/f3092131-0875-40eb-a821-c22f5fa35ec2 HTTP/1.1
+PUT http://localhost:3000/partidas/d27185b2-0525-499c-89d5-0c7974a240fc HTTP/1.1
 content-type: application/json
 
 # {
-#     "id": "57f4c940-d8d4-4fb4-b4cc-27d0a997b512"
+#     "visitante": "dadas"
 # }
 ###
 
 
-DELETE  http://localhost:3000/partidas/48baa042-604f-4b51-b04e-86b5024e770e HTTP/1.1
+DELETE  http://localhost:3000/partidas/3a0ba8ac-582c-410a-b6b9-83ed11c1543f HTTP/1.1
 content-type: application/json
 
 # {
