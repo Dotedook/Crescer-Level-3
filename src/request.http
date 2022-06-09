@@ -15,14 +15,18 @@ content-type: application/json
 ###
 
 
-PUT http://localhost:3000/partidas/b47a6052-2c7b-42c3-b927-ac3e0ec34446 HTTP/1.1
+PUT http://localhost:3000/partidas/f3092131-0875-40eb-a821-c22f5fa35ec2 HTTP/1.1
 content-type: application/json
 
-{
-    "id": "4f570039-bc33-43ed-835a-30b147ea7779"
-}
+# {
+#     "id": "57f4c940-d8d4-4fb4-b4cc-27d0a997b512"
+# }
 ###
 
 
-DELETE  http://localhost:3000/partidas/fe5a0304-330a-4790-bb58-4cff4e23adef HTTP/1.1
+DELETE  http://localhost:3000/partidas/48baa042-604f-4b51-b04e-86b5024e770e HTTP/1.1
 content-type: application/json
+
+# {
+#     "id": "57f4c940-d8d4-4fb4-b4cc-27d0a997b512"
+# }

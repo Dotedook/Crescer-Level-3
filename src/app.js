@@ -6,6 +6,7 @@ import {
   validarSchema,
 } from './app-service'
 import { schemaCriacaoPartida, schemaEdicaoPartida } from './schema-validators'
+import { validarIndexPartida } from './app-validator'
 
 const { checkSchema } = require('express-validator')
 const express = require('express')
@@ -16,9 +17,9 @@ const fluxoBuscarPartidas = [getPartidas]
 
 const fluxoCriarPartida = [validarSchema, criarPartida]
 
-const fluxoEditarPartida = [validarSchema, editarPartida]
+const fluxoEditarPartida = [validarSchema, validarIndexPartida, editarPartida]
 
-const fluxoDeletarPartida = [validarSchema, deletarPartida]
+const fluxoDeletarPartida = [validarSchema, validarIndexPartida, deletarPartida]
 
 app.use(express.json())
 
