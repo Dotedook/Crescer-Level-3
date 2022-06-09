@@ -7,10 +7,16 @@ POST http://localhost:3000/partidas HTTP/1.1
 content-type: application/json
 
 {
-    "visitante": "Internacional",
-    "casa": "Grêmio",
-    "placarVisitante": "10",
-    "placarCasa": "10"
+    "data": "09/06/2022",
+    "esporte": "Futebol",
+    "casa": {
+      "time": "Brasil",
+      "pontuacao": 2,
+    },
+    "visitante": {
+      "time": "Alemanha",
+      "pontuacao": 0,
+    }
 }
 ###
 
@@ -18,9 +24,9 @@ content-type: application/json
 PUT http://localhost:3000/partidas/d27185b2-0525-499c-89d5-0c7974a240fc HTTP/1.1
 content-type: application/json
 
-# {
-#     "visitante": "dadas"
-# }
+{
+    "visitante": "dadas"
+}
 ###
 
 

@@ -8,13 +8,7 @@ export const getPartidas = (req, res) => {
 }
 
 export const criarPartida = (req, res) => {
-  const { casa, visitante, placarCasa, placarVisitante } = req.body
-
-  const partida = { casa, visitante, placarCasa, placarVisitante, id: randomUUID() }
-
-  partidas.push(partida)
-
-  res.send(partida)
+  res.send('DALE')
 }
 
 export const editarPartida = (req, res) => {
@@ -37,6 +31,7 @@ export const deletarPartida = (req, res) => {
 }
 
 export const validarSchema = (req, res, next) => {
+  console.log(req)
   const erros = validationResult(req)
   if (!erros.isEmpty()) {
     return res.status(400).json({ errors: erros.array() })

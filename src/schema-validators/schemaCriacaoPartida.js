@@ -1,28 +1,59 @@
 export const schemaCriacaoPartida = {
-  visitante: {
-    in: ['body'],
-    notEmpty: true,
-    errorMessage: 'Propriedade visitante não pode ser vazia',
-    trim: true, 
+  id: {
+    in: ['body', 'headers', 'cookies', 'query'],
+    isEmpty: true,
+    errorMessage: 'O ID deve vir como parâmetro para editar uma partida!',
   },
-  casa: {
+  data: {
     in: ['body'],
     notEmpty: true,
-    errorMessage: 'Propriedade casa não pode ser vazia',
+    isDate: true,
+    errorMessage: 'A data informada é inválida!',
+  },
+  esporte: {
+    in: ['body'],
+    notEmpty: true,
+    errorMessage: 'O esporte deve ser informado!',
     trim: true,
   },
-  placarVisitante: {
+  isEmpate: {
     in: ['body'],
-    notEmpty: true,
-    isInt: true,
-    errorMessage: 'Propriedade Placar visitante deve ser apenas inteiros',
-    toInt: true,
+    isEmpty: true,
+    errorMessage: 'O empate não deve ser informado!',
   },
-  placarCasa: {
+  vencedor: {
     in: ['body'],
-    notEmpty: true,
-    isInt: true,
-    errorMessage: 'Propriedade Placar visitante deve ser apenas inteiros',
-    toInt: true,
+    isEmpty: true,
+    errorMessage: 'O vencedor não deve ser informado!',
   },
+  // casa: {
+  //   time: {
+  //     in: ['body'],
+  //     notEmpty: true,
+  //     errorMessage: 'O time deve ser informado!',
+  //     trim: true,
+  //   },
+  //   pontuacao: {
+  //     in: ['body'],
+  //     notEmpty: true,
+  //     isInt: true,
+  //     errorMessage: 'A pontuação deve ser um número inteiro!',
+  //     toInt: true,
+  //   },
+  // },
+  // visitante: {
+  //   time: {
+  //     in: ['body'],
+  //     notEmpty: true,
+  //     errorMessage: 'O time deve ser informado!',
+  //     trim: true,
+  //   },
+  //   pontuacao: {
+  //     in: ['body'],
+  //     notEmpty: true,
+  //     isInt: true,
+  //     errorMessage: 'A pontuação deve ser um número inteiro!',
+  //     toInt: true,
+  //   },
+  // },
 }
