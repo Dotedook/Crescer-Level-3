@@ -6,7 +6,6 @@ export const schemaCriacaoPartida = {
   },
   data: {
     in: ['body'],
-    notEmpty: true,
     isDate: true,
     errorMessage: 'A data informada é inválida!',
   },
@@ -26,34 +25,30 @@ export const schemaCriacaoPartida = {
     isEmpty: true,
     errorMessage: 'O vencedor não deve ser informado!',
   },
-  // casa: {
-  //   time: {
-  //     in: ['body'],
-  //     notEmpty: true,
-  //     errorMessage: 'O time deve ser informado!',
-  //     trim: true,
-  //   },
-  //   pontuacao: {
-  //     in: ['body'],
-  //     notEmpty: true,
-  //     isInt: true,
-  //     errorMessage: 'A pontuação deve ser um número inteiro!',
-  //     toInt: true,
-  //   },
-  // },
-  // visitante: {
-  //   time: {
-  //     in: ['body'],
-  //     notEmpty: true,
-  //     errorMessage: 'O time deve ser informado!',
-  //     trim: true,
-  //   },
-  //   pontuacao: {
-  //     in: ['body'],
-  //     notEmpty: true,
-  //     isInt: true,
-  //     errorMessage: 'A pontuação deve ser um número inteiro!',
-  //     toInt: true,
-  //   },
-  // },
+  'casa.time': {
+    in: ['body'],
+    notEmpty: true,
+    errorMessage: 'O time deve ser informado!',
+    trim: true,
+  },
+  'casa.pontuacao': {
+    in: ['body'],
+    notEmpty: { bail: true },
+    isInt: true,
+    errorMessage: 'A pontuação deve ser um número inteiro!',
+    toInt: true,
+  },
+  'visitante.time': {
+    in: ['body'],
+    notEmpty: true,
+    errorMessage: 'O time deve ser informado corretamente!',
+    trim: true,
+  },
+  'visitante.pontuacao': {
+    in: ['body'],
+    notEmpty: { bail: true },
+    isInt: true,
+    errorMessage: 'A pontuação deve ser informada corretamente!',
+    toInt: true,
+  },
 }

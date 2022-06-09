@@ -8,10 +8,16 @@ beforeEach(() => {
   partidas.splice(0, partidas.length)
   api = app
   partidaPadrao = {
-    visitante: 'Grêmio',
-    casa: 'Internacional',
-    placarVisitante: 10,
-    placarCasa: 0,
+    data: '2020/05/05',
+    esporte: 'Futebol',
+    casa: {
+      time: 'Brasil',
+      pontuacao: 2,
+    },
+    visitante: {
+      time: 'Alemanha',
+      pontuacao: 0,
+    },
   }
 })
 
@@ -82,8 +88,10 @@ describe('Testes chamada PUT', () => {
 
   test('Deve Alterar corretamente uma partida inteira menos o ID', async () => {
     const novaPartida = {
-      visitante: 'Palmeiras',
       casa: 'Vasco Da Gama',
+      visitante: 'Palmeiras',
+      data: '2020/05/05',
+      esporte: 'Futebol',
       placarVisitante: 8,
       placarCasa: 10,
     }
@@ -108,13 +116,13 @@ describe('Testes chamada PUT', () => {
       placarCasa: 10,
     }
     const idPartida = 0
-    const statusEsperado = 400
-    const mensagemEsperada = 'Partida não encontrada!'
+    const statusEsperado = 404
+    const mensagemEsperada = 'Não existe uma partida com o ID informado!'
 
     const responsePut = await request(api).put(`/partidas/${idPartida}`).send(novaPartida)
 
     expect(responsePut.status).toEqual(statusEsperado)
-    expect(responsePut.body.errors[0].msg).toBe(mensagemEsperada)
+    expect(responsePut.text).toBe(mensagemEsperada)
   })
 })
 
@@ -134,12 +142,42 @@ describe('Testes chamada DELETE', () => {
 
   test('Deve lançar erro se não houver nenhuma partida com o ID informado', async () => {
     const idPartida = 0
-    const statusEsperado = 400
-    const mensagemEsperada = 'Partida não encontrada!'
+    const statusEsperado = 404
+    const mensagemEsperada = 'Não existe uma partida com o ID informado!'
 
     const responseDel = await request(api).del(`/partidas/${idPartida}`)
 
     expect(responseDel.status).toEqual(statusEsperado)
-    expect(responseDel.body.errors[0].msg).toBe(mensagemEsperada)
+    expect(responseDel.text).toBe(mensagemEsperada)
+  })
+})
+
+describe('Testes validações schema', () => {
+  test('Deve retornar array de erros quando pontuação não informada', async () => {
+    const partidaComErro = {
+      data: '2020/05/05',
+      esporte: 'Futebol',
+      casa: {
+        time: 'Brasil',
+        pontuacao: 2,
+      },
+      visitante: {
+        time: 'Alemanha',
+      },
+    }
+    const statusEsperado = 400
+    const errosEsperados = [
+      {
+        msg: 'A pontuação deve ser informada corretamente!',
+        param: 'visitante.pontuacao',
+        location: 'body',
+      },
+    ]
+
+    const responsePost = await request(api).post('/partidas').send(partidaComErro)
+
+    expect(responsePost.status).toBe(statusEsperado)
+    expect(errosEsperados.length).toBe(responsePost.body.errors.length)
+    expect(errosEsperados[0]).toEqual(responsePost.body.errors[0])
   })
 })
