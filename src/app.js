@@ -1,6 +1,11 @@
-import { getPartidas, criarPartida, editarPartida, deletarPartida } from './app-service'
-import { validarIndexPartida } from './app-validator'
-import { schemaPartida } from './schema-validators/partidaSchemaValidator'
+import {
+  getPartidas,
+  criarPartida,
+  editarPartida,
+  deletarPartida,
+  validarSchema,
+} from './app-service'
+import { schemaCriacaoPartida, schemaEdicaoPartida } from './schema-validators'
 
 const { checkSchema } = require('express-validator')
 const express = require('express')
@@ -9,21 +14,21 @@ const port = 3000
 
 const fluxoBuscarPartidas = [getPartidas]
 
-const fluxoCriarPartida = [criarPartida]
+const fluxoCriarPartida = [validarSchema, criarPartida]
 
-const fluxoEditarPartida = [validarIndexPartida, editarPartida]
+const fluxoEditarPartida = [validarSchema, editarPartida]
 
-const fluxoDeletarPartida = [validarIndexPartida, deletarPartida]
+const fluxoDeletarPartida = [validarSchema, deletarPartida]
 
 app.use(express.json())
 
 app.get('/partidas', fluxoBuscarPartidas)
 
-app.post('/partidas', checkSchema(schemaPartida), fluxoCriarPartida)
+app.post('/partidas', checkSchema(schemaCriacaoPartida), fluxoCriarPartida)
 
-app.put('/partidas/:id', fluxoEditarPartida)
+app.put('/partidas/:id', checkSchema(schemaEdicaoPartida), fluxoEditarPartida)
 
-app.delete('/partidas/:id', fluxoDeletarPartida)
+app.delete('/partidas/:id', checkSchema(schemaEdicaoPartida), fluxoDeletarPartida)
 
 app.listen(port, () => {
   console.log(`Aplicação executando na porta ${port}`)

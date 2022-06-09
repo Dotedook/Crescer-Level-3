@@ -1,5 +1,5 @@
+import { validationResult } from 'express-validator'
 import { partidas } from './app-repository'
-import { validarIndexPartida } from './app-validator'
 
 const { randomUUID } = require('crypto')
 
@@ -34,4 +34,12 @@ export const deletarPartida = (req, res) => {
   partidas.splice(indexPartida, 1)
 
   res.send(partidas)
+}
+
+export const validarSchema = (req, res, next) => {
+  const erros = validationResult(req)
+  if (!erros.isEmpty()) {
+    return res.status(400).json({ errors: erros.array() })
+  }
+  next()
 }

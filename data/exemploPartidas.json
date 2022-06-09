@@ -1,0 +1,81 @@
+[
+    {
+      "id": 1,
+      "horario": "10:10",
+      "data": "09/06/2022",
+      "tipoEsporte": "Futebol",
+      "placar": {
+        "visitante": {
+          "pontuacao": 2,
+          "pontuadores": [
+            { "nome": "Neymar JR", "quant": 1 },
+            { "nome": "Vinícius Júnior", "quant": 1 }
+          ]
+        },
+        "casa": {
+          "pontuacao": 0,
+          "pontuadores": []
+        }
+      },
+      "visitante": {
+        "nome": "Brasil",
+        "jogadores": [
+          { "nome": "Neymar Jr", "idade": 30, "saldo": 804, "tipo": "Meio Campo" },
+          { "nome": "Vinícius Júnior", "idade": 21, "saldo": 154, "tipo": "Ponta Esquerda" }
+        ],
+        "vitorias": 20,
+        "derrotas": 0
+      },
+      "casa": {
+        "nome": "Alemanha",
+        "jogadores": [
+          { "nome": "Thomas Muller", "idade": 40, "saldo": 14, "tipo": "Atacante" },
+          { "nome": "Manuel Neuer", "idade": 26, "saldo": 0, "tipo": "Goleiro" }
+        ],
+        "vitorias": 5,
+        "derrotas": 1
+      }
+    },
+    {
+      "horario": "10:10",
+      "data": "09/06/2022",
+      "tipoEsporte": "Basquete",
+      "placar": {
+        "visitante": {
+          "pontuacao": 125,
+          "pontuadores": [
+            { "nome": "Stephen Curry", "quant": 120 },
+            { "nome": "Klay Thompson", "quant": 5 }
+          ]
+        },
+        "casa": {
+          "pontuacao": 115,
+          "pontuadores": [
+            { "nome": "Lebron James", "quant": 100 },
+            { "nome": "Kevin Durant", "quant": 15 }
+          ]
+        }
+      },
+      "visitante": {
+        "nome": "Golden State Warrios",
+        "jogadores": [
+          { "nome": "Stephen Curry", "idade": 30, "saldo": 5382, "tipo": "Armador" },
+          { "nome": "Draymond Green", "idade": 32, "saldo": 1256, "tipo": "Pivô" },
+          { "nome": "Klay Thompson", "idade": 21, "saldo": 4789, "tipo": "Ala" }
+        ],
+        "vitorias": 15,
+        "derrotas": 3
+      },
+      "casa": {
+        "nome": "Lakers",
+        "jogadores": [
+          { "nome": "Lebron James", "idade": 40, "saldo": 14089, "tipo": "Ala" },
+          { "nome": "Anthony Davis", "idade": 29, "saldo": 1265, "tipo": "Pivô" },
+          { "nome": "Kevin Durant", "idade": 26, "saldo": 0, "tipo": "Ala" }
+        ],
+        "vitorias": 16,
+        "derrotas": 1
+      }
+    }
+  ]
+  
