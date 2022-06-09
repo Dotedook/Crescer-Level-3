@@ -15,14 +15,14 @@ content-type: application/json
 ###
 
 
-PUT http://localhost:3000/partidas/0d900a27-25ae-4dd2-8657-b19b01b25c4c HTTP/1.1
+PUT http://localhost:3000/partidas/b47a6052-2c7b-42c3-b927-ac3e0ec34446 HTTP/1.1
 content-type: application/json
 
 {
-    "visitante": "Palmeiras"
+    "id": "4f570039-bc33-43ed-835a-30b147ea7779"
 }
 ###
 
 
-DELETE  http://localhost:3000/partidas/faa7482f-5749-4780-94d4-ecfb3ae21616 HTTP/1.1
+DELETE  http://localhost:3000/partidas/fe5a0304-330a-4790-bb58-4cff4e23adef HTTP/1.1
 content-type: application/json

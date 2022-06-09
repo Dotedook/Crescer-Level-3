@@ -108,13 +108,13 @@ describe('Testes chamada PUT', () => {
       placarCasa: 10,
     }
     const idPartida = 0
-    const statusEsperado = 404
-    const mensagemEsperada = 'Partida não encontrada'
+    const statusEsperado = 400
+    const mensagemEsperada = 'Partida não encontrada!'
 
     const responsePut = await request(api).put(`/partidas/${idPartida}`).send(novaPartida)
 
     expect(responsePut.status).toEqual(statusEsperado)
-    expect(responsePut.text).toBe(mensagemEsperada)
+    expect(responsePut.body.errors[0].msg).toBe(mensagemEsperada)
   })
 })
 
@@ -134,12 +134,12 @@ describe('Testes chamada DELETE', () => {
 
   test('Deve lançar erro se não houver nenhuma partida com o ID informado', async () => {
     const idPartida = 0
-    const statusEsperado = 404
-    const mensagemEsperada = 'Partida não encontrada'
+    const statusEsperado = 400
+    const mensagemEsperada = 'Partida não encontrada!'
 
     const responseDel = await request(api).del(`/partidas/${idPartida}`)
 
     expect(responseDel.status).toEqual(statusEsperado)
-    expect(responseDel.text).toBe(mensagemEsperada)
+    expect(responseDel.body.errors[0].msg).toBe(mensagemEsperada)
   })
 })
