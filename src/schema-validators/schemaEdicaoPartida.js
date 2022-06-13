@@ -15,28 +15,50 @@ export const schemaEdicaoPartida = {
     optional: { options: { nullable: true } },
     trim: true,
   },
-  isEmpate: {
+  'casa.time': {
     in: ['body'],
-    isEmpty: true,
     optional: { options: { nullable: true } },
-    errorMessage: 'O empate não deve ser informado!',
+    custom: {
+      options: (_, { req }) => req.body.casa.pontuacao.toString(),
+      errorMessage: 'A pontuação da casa deve ser informada!',
+    },
+    trim: true,
   },
-  vencedor: {
+  'casa.pontuacao': {
     in: ['body'],
-    isEmpty: true,
     optional: { options: { nullable: true } },
-    errorMessage: 'O vencedor não deve ser informado!',
+    isInt: {
+      bail: true,
+      options: { min: 0 },
+      errorMessage: 'A pontuação da casa deve ser um inteiro acima ou igual a 0!',
+    },
+    custom: {
+      options: (_, { req }) => req.body.casa.time,
+      errorMessage: 'O nome da casa deve ser informado!',
+    },
+    toInt: true,
   },
-  casa: {
+  'visitante.time': {
     in: ['body'],
-    isEmpty: true,
     optional: { options: { nullable: true } },
-    errorMessage: 'A casa não deve ser informada!',
+    custom: {
+      options: (_, { req }) => req.body.visitante.pontuacao.toString(),
+      errorMessage: 'A pontuação do visitante deve ser informada!',
+    },
+    trim: true,
   },
-  visitante: {
+  'visitante.pontuacao': {
     in: ['body'],
-    isEmpty: true,
     optional: { options: { nullable: true } },
-    errorMessage: 'O visitante não deve ser informado!',
+    isInt: {
+      bail: true,
+      options: { min: 0 },
+      errorMessage: 'A pontuação do visitante deve ser um inteiro acima ou igual a 0!',
+    },
+    custom: {
+      options: (_, { req }) => req.body.visitante.time,
+      errorMessage: 'O nome do visitante deve ser informada!',
+    },
+    toInt: true,
   },
 }

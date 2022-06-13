@@ -1,11 +1,5 @@
-import {
-  getPartidas,
-  criarPartida,
-  editarPartida,
-  deletarPartida,
-  editarTimePartida,
-} from './app-service'
-import { schemaCriacaoPartida, schemaEdicaoPartida, schemaEdicaoTime } from './schema-validators'
+import { getPartidas, criarPartida, editarPartida, deletarPartida } from './app-service'
+import { schemaCriacaoPartida, schemaEdicaoPartida } from './schema-validators'
 import { validarIndexPartida } from './app-validator'
 import { validarSchema } from './app-utils'
 
@@ -18,8 +12,6 @@ const fluxoBuscarPartidas = [getPartidas]
 
 const fluxoCriarPartida = [validarSchema, criarPartida]
 
-const fluxoEditarTime = [editarTimePartida]
-
 const fluxoEditarPartida = [validarSchema, validarIndexPartida, editarPartida]
 
 const fluxoDeletarPartida = [validarSchema, validarIndexPartida, deletarPartida]
@@ -31,8 +23,6 @@ app.get('/partidas', fluxoBuscarPartidas)
 app.post('/partidas', checkSchema(schemaCriacaoPartida), fluxoCriarPartida)
 
 app.put('/partidas/:id', checkSchema(schemaEdicaoPartida), fluxoEditarPartida)
-
-app.put('/time/:id', checkSchema(schemaEdicaoTime), fluxoEditarTime)
 
 app.delete('/partidas/:id', checkSchema(schemaEdicaoPartida), fluxoDeletarPartida)
 
