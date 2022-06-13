@@ -15,40 +15,36 @@ export const schemaCriacaoPartida = {
     errorMessage: 'O esporte deve ser informado!',
     trim: true,
   },
-  isEmpate: {
-    in: ['body'],
-    isEmpty: true,
-    errorMessage: 'O empate não deve ser informado!',
-  },
-  vencedor: {
-    in: ['body'],
-    isEmpty: true,
-    errorMessage: 'O vencedor não deve ser informado!',
-  },
   'casa.time': {
     in: ['body'],
     notEmpty: true,
-    errorMessage: 'O time deve ser informado!',
+    errorMessage: 'O time da casa deve ser informado!',
     trim: true,
   },
   'casa.pontuacao': {
     in: ['body'],
     notEmpty: { bail: true },
-    isInt: true,
-    errorMessage: 'A pontuação deve ser um número inteiro!',
+    isInt: {
+      options: { min: 0 },
+      errorMessage: 'A pontuação da casa deve ser um inteiro acima ou igual 0',
+    },
+    errorMessage: 'A pontuação da casa deve ser informada!',
     toInt: true,
   },
   'visitante.time': {
     in: ['body'],
     notEmpty: true,
-    errorMessage: 'O time deve ser informado corretamente!',
+    errorMessage: 'O time do visitante deve ser informado!',
     trim: true,
   },
   'visitante.pontuacao': {
     in: ['body'],
     notEmpty: { bail: true },
-    isInt: true,
-    errorMessage: 'A pontuação deve ser informada corretamente!',
+    isInt: {
+      options: { min: 0 },
+      errorMessage: 'A pontuação do visitante deve ser um inteiro acima ou igual 0',
+    },
+    errorMessage: 'A pontuação do visitante deve ser informada!',
     toInt: true,
   },
 }

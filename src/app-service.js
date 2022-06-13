@@ -1,9 +1,7 @@
 import { partidas } from './app-repository'
 import {
   buscarIndexPartida,
-  buscarPartidaPorId,
   calcularResultado,
-  getPartidaTimeEditada,
 } from './app-utils'
 
 const { randomUUID } = require('crypto')
@@ -32,27 +30,6 @@ export const editarPartida = (req, res) => {
   partidas[indexPartida] = partidaComResultado
 
   res.send(partidas[indexPartida])
-}
-
-export const editarTimePartida = (req, res) => {
-  const { id } = req.params
-  const partida = buscarPartidaPorId(id)
-
-  const { visitante, casa } = req.body
-
-  console.log(req.body)
-
-  if (visitante) {
-    const novaPartida = getPartidaTimeEditada(partida, 'visitante', visitante)
-    partida.visitante = novaPartida.visitante
-  }
-
-  if (casa) {
-    const novaPartida = getPartidaTimeEditada(partida, 'casa', casa)
-    partida.casa = novaPartida.casa
-  }
-
-  res.send(partida)
 }
 
 export const deletarPartida = (req, res) => {

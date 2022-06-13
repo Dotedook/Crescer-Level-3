@@ -33,17 +33,3 @@ export const buscarPartidaPorId = id => {
 export const buscarIndexPartida = id => {
   return partidas.findIndex(partida => id === partida.id)
 }
-
-export const getPartidaTimeEditada = (partida, tipo, propriedade) => {
-  const novaPartida = { ...partida }
-
-  if (propriedade.time) {
-    novaPartida[tipo].time = propriedade.time
-  }
-  if (propriedade.pontuacao) {
-    novaPartida[tipo].pontuacao = propriedade.pontuacao
-  }
-
-  calcularResultado(novaPartida)
-  return novaPartida
-}
