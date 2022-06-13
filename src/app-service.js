@@ -1,8 +1,5 @@
 import { partidas } from './app-repository'
-import {
-  buscarIndexPartida,
-  calcularResultado,
-} from './app-utils'
+import { buscarIndexPartida, calcularResultado } from './app-utils'
 
 const { randomUUID } = require('crypto')
 
@@ -39,4 +36,21 @@ export const deletarPartida = (req, res) => {
   partidas.splice(indexPartida, 1)
 
   res.send(partidas)
+}
+
+export const getTime = (req, res) => {
+  const nomeTime = req.headers.authorization
+  const resposta = {
+    nome: nomeTime,
+    partidasJogadas: 0,
+    golsFeitos: 0,
+    golsTomados: 0,
+    vitorias: 0,
+    derrotas: 0,
+    empates: 0,
+  }
+
+  //VITIN VAI FAZER :)
+
+  res.send(resposta)
 }

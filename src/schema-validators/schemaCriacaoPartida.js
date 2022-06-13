@@ -4,6 +4,11 @@ export const schemaCriacaoPartida = {
     isEmpty: true,
     errorMessage: 'O ID deve vir como parâmetro para editar uma partida!',
   },
+  authorization: {
+    in: ['headers'],
+    notEmpty: true,
+    errorMessage: 'O token de autenticacao deve ser informado!',
+  },
   data: {
     in: ['body'],
     isDate: true,
