@@ -22,7 +22,7 @@ Authorization: eduardoToken
 ###
 
 
-PUT http://localhost:3000/partidas/c46db55d-f462-4740-ac91-7a8f142c0565 HTTP/1.1
+PUT http://localhost:3000/partidas/1 HTTP/1.1
 content-type: application/json
 Authorization: eduardoToken
 
@@ -40,7 +40,7 @@ Authorization: eduardoToken
 
 ###
 
-DELETE  http://localhost:3000/partidas/3a0ba8ac-582c-410a-b6b9-83ed11c1543f HTTP/1.1
+DELETE  http://localhost:3000/partidas/e1a3b63a-ca8c-4986-8d4a-11ecaa60bfc6 HTTP/1.1
 content-type: application/json
 Authorization: eduardoToken
 

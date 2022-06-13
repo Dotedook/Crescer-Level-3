@@ -4,7 +4,7 @@ export let partidas = [
     data: '09/06/2022',
     esporte: 'Futebol',
     isEmpate: false,
-    vencedor: 'CASA',
+    vencedor: 'Brasil',
     casa: {
       time: 'Brasil',
       pontuacao: 2,
