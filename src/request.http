@@ -14,21 +14,37 @@ content-type: application/json
       "pontuacao": 2
     },
     "visitante": {
-      "time": "Alemanha",
-      "pontuacao": "0"
+      "time": "Japão",
+      "pontuacao": "5"
   }
 }
 ###
 
 
-PUT http://localhost:3000/partidas/d27185b2-0525-499c-89d5-0c7974a240fc HTTP/1.1
+PUT http://localhost:3000/partidas/2b9cc10c-c04e-4af3-b3a6-03b484406a36 HTTP/1.1
 content-type: application/json
 
 {
-    "visitante": "dadas"
+    "visitante": {
+      "pontuacao": 2
+    }
 }
 ###
 
+PUT http://localhost:3000/time/b92109a3-d840-4341-b3b8-4d0dfb6aa8b5 HTTP/1.1
+content-type: application/json
+
+{
+    "casa": {
+      "time": "Japão"
+      "pontuacao": "10"
+    },
+    "visitante": {
+      "time": "Alemanha",
+      "pontuacao": "2"
+    }
+}
+###
 
 DELETE  http://localhost:3000/partidas/3a0ba8ac-582c-410a-b6b9-83ed11c1543f HTTP/1.1
 content-type: application/json

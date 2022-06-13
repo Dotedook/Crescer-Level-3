@@ -1,5 +1,10 @@
-import { validationResult } from 'express-validator'
 import { partidas } from './app-repository'
+import {
+  buscarIndexPartida,
+  buscarPartidaPorId,
+  calcularResultado,
+  getPartidaTimeEditada,
+} from './app-utils'
 
 const { randomUUID } = require('crypto')
 
@@ -10,34 +15,51 @@ export const getPartidas = (req, res) => {
 export const criarPartida = (req, res) => {
   const novaPartida = { id: randomUUID(), ...req.body }
 
-  partidas.push(novaPartida)
+  const partidaComResultado = calcularResultado(novaPartida)
 
-  res.send(req.body)
+  partidas.push(partidaComResultado)
+
+  res.send(partidaComResultado)
 }
 
 export const editarPartida = (req, res) => {
   const { id } = req.params
-  const indexPartida = partidas.findIndex(partida => id === partida.id)
+  const indexPartida = buscarIndexPartida(id)
+  const novaPartida = { ...partidas[indexPartida], ...req.body }
 
-  partidas[indexPartida] = { ...partidas[indexPartida], ...req.body }
+  const partidaComResultado = calcularResultado(novaPartida)
+
+  partidas[indexPartida] = partidaComResultado
 
   res.send(partidas[indexPartida])
 }
 
-export const deletarPartida = (req, res) => {
+export const editarTimePartida = (req, res) => {
   const { id } = req.params
+  const partida = buscarPartidaPorId(id)
 
-  const indexPartida = partidas.findIndex(partida => id === partida.id)
+  const { visitante, casa } = req.body
+
+  console.log(req.body)
+
+  if (visitante) {
+    const novaPartida = getPartidaTimeEditada(partida, 'visitante', visitante)
+    partida.visitante = novaPartida.visitante
+  }
+
+  if (casa) {
+    const novaPartida = getPartidaTimeEditada(partida, 'casa', casa)
+    partida.casa = novaPartida.casa
+  }
+
+  res.send(partida)
+}
+
+export const deletarPartida = (req, res) => {
+  const { id } = req.paramss
+  const indexPartida = buscarIndexPartida(id)
 
   partidas.splice(indexPartida, 1)
 
   res.send(partidas)
-}
-
-export const validarSchema = (req, res, next) => {
-  const erros = validationResult(req)
-  if (!erros.isEmpty()) {
-    return res.status(400).json({ errors: erros.array() })
-  }
-  next()
 }
