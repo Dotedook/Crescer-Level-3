@@ -1,5 +1,10 @@
 import { partidas } from './app-repository'
-import { buscarIndexPartida, calcularResultado } from './app-utils'
+import {
+  buscarIndexPartida,
+  calcularResultado,
+  buscarPartidasTime,
+  buscarInformacoesTime,
+} from './app-utils'
 
 const { randomUUID } = require('crypto')
 
@@ -30,7 +35,7 @@ export const editarPartida = (req, res) => {
 }
 
 export const deletarPartida = (req, res) => {
-  const { id } = req.paramss
+  const { id } = req.params
   const indexPartida = buscarIndexPartida(id)
 
   partidas.splice(indexPartida, 1)
@@ -40,17 +45,15 @@ export const deletarPartida = (req, res) => {
 
 export const getTime = (req, res) => {
   const nomeTime = req.headers.authorization
+
+  const partidasTime = buscarPartidasTime(nomeTime)
+
+  const informacoesTime = buscarInformacoesTime(partidasTime, nomeTime)
   const resposta = {
     nome: nomeTime,
-    partidasJogadas: 0,
-    golsFeitos: 0,
-    golsTomados: 0,
-    vitorias: 0,
-    derrotas: 0,
-    empates: 0,
+    partidasJogadas: partidasTime.length,
+    ...informacoesTime,
   }
-
-  //VITIN VAI FAZER :)
 
   res.send(resposta)
 }
