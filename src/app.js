@@ -11,7 +11,7 @@ import { validarIndexPartida } from './app-validator'
 const { checkSchema } = require('express-validator')
 const express = require('express')
 export const app = express()
-const port = 3000
+const port = process.env.PORTA_EXECUÇÃO
 
 const fluxoBuscarPartidas = [getPartidas]
 
