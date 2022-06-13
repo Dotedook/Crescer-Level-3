@@ -5,6 +5,7 @@ content-type: application/json
 
 POST http://localhost:3000/partidas HTTP/1.1
 content-type: application/json
+Authorization: eduardoToken
 
 {
     "data": "2020/05/05",
@@ -23,6 +24,7 @@ content-type: application/json
 
 PUT http://localhost:3000/partidas/c46db55d-f462-4740-ac91-7a8f142c0565 HTTP/1.1
 content-type: application/json
+Authorization: eduardoToken
 
 {
     "esporte": "vôlei",
@@ -35,25 +37,18 @@ content-type: application/json
       "pontuacao": 0
     }
 }
-###
 
-PUT http://localhost:3000/time/63879bf7-9e7e-432c-8573-968e9a14952e HTTP/1.1
-content-type: application/json
-
-{
-    "casa": {
-      "pontuacao": "2"
-    },
-    "visitante": {
-      "time": "Alemanha",
-      "pontuacao": "2"
-    }
-}
 ###
 
 DELETE  http://localhost:3000/partidas/3a0ba8ac-582c-410a-b6b9-83ed11c1543f HTTP/1.1
 content-type: application/json
+Authorization: eduardoToken
 
-# {
-#     "id": "57f4c940-d8d4-4fb4-b4cc-27d0a997b512"
-# }
+
+###
+
+
+GET http://localhost:3000/time HTTP/1.1
+content-type: application/json
+Authorization: Brasil
+###
