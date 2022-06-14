@@ -1,4 +1,6 @@
 import { partidas } from '../../repository/app-repository'
+import { valorInicialInformacoesTime } from '../../constants'
+import { validacoesTime } from '/utils/app-utils'
 
 export const getTime = (req, res) => {
   const nomeTime = req.headers.authorization
@@ -40,23 +42,4 @@ const buscarInformacoesTime = (partidasTime, nomeTime) => {
       empates: infosTime.empates + validacoesTime.empates(partidaAtual),
     }
   }, valorInicialInformacoesTime)
-}
-
-const valorInicialInformacoesTime = {
-  pontosFeitos: 0,
-  pontosTomados: 0,
-  vitorias: 0,
-  derrotas: 0,
-  empates: 0,
-}
-
-const validacoesTime = {
-  golsFeitos: (partida, nomeTime) =>
-    partida.casa.time === nomeTime ? partida.casa.pontuacao : partida.visitante.pontuacao,
-  golsTomados: (partida, nomeTime) =>
-    partida.casa.time === nomeTime ? partida.visitante.pontuacao : partida.casa.pontuacao,
-  vitorias: (partida, nomeTime) => (partida.vencedor === nomeTime ? 1 : 0),
-  derrotas: (partida, nomeTime) =>
-    partida.vencedor !== null && partida.vencedor !== nomeTime ? 1 : 0,
-  empates: partida => (partida.isEmpate ? 1 : 0),
 }

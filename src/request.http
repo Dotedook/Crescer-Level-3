@@ -52,3 +52,8 @@ GET http://localhost:3000/time HTTP/1.1
 content-type: application/json
 Authorization: Brasil
 ###
+
+GET http://localhost:3000/tabela HTTP/1.1
+content-type: application/json
+
+###
