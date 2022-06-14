@@ -23,15 +23,18 @@ const getTimeComInformacoes = nomeTime => {
 
 const buscarPartidasTime = nomeTime => {
   return partidas.filter(partida => {
-    return partida.casa.time.toUpperCase() === nomeTime.toUpperCase() || partida.visitante.time.toUpperCase() === nomeTime.toUpperCase()
+    return (
+      partida.casa.time.toUpperCase() === nomeTime.toUpperCase() ||
+      partida.visitante.time.toUpperCase() === nomeTime.toUpperCase()
+    )
   })
 }
 
 const buscarInformacoesTime = (partidasTime, nomeTime) => {
   return partidasTime.reduce((infosTime, partidaAtual) => {
     return {
-      golsFeitos: infosTime.golsFeitos + validacoesTime.golsFeitos(partidaAtual, nomeTime),
-      golsTomados: infosTime.golsTomados + validacoesTime.golsTomados(partidaAtual, nomeTime),
+      pontosFeitos: infosTime.pontosFeitos + validacoesTime.golsFeitos(partidaAtual, nomeTime),
+      pontosTomados: infosTime.pontosTomados + validacoesTime.golsTomados(partidaAtual, nomeTime),
       vitorias: infosTime.vitorias + validacoesTime.vitorias(partidaAtual, nomeTime),
       derrotas: infosTime.derrotas + validacoesTime.derrotas(partidaAtual, nomeTime),
       empates: infosTime.empates + validacoesTime.empates(partidaAtual),
@@ -40,8 +43,8 @@ const buscarInformacoesTime = (partidasTime, nomeTime) => {
 }
 
 const valorInicialInformacoesTime = {
-  golsFeitos: 0,
-  golsTomados: 0,
+  pontosFeitos: 0,
+  pontosTomados: 0,
   vitorias: 0,
   derrotas: 0,
   empates: 0,

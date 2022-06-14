@@ -24,5 +24,3 @@ export const buscarPartidaPorId = id => {
 export const buscarIndexPartida = id => {
   return partidas.findIndex(partida => id === partida.id)
 }
-
-
