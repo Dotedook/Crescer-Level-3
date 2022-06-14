@@ -1,13 +1,16 @@
-import { getPartidas, criarPartida, editarPartida, deletarPartida, getTime } from './app-service'
+import { getTime } from '../service/buscar-times-service/buscar-times-service'
+import { deletarPartida } from '../service/deletar-partida-service/deletar-partida-service'
+import { getPartidas } from '../service/buscar-partidas-service/buscar-partidas-service'
+import { editarPartida } from '../service/editar-partida-service/editar-partida-service'
+import { criarPartida } from '../service/criar-partida/criar-partida-service'
 import {
   schemaCriacaoPartida,
   schemaEdicaoPartida,
   schemaExcluirPartida,
   schemaBuscarTime,
-} from './schema-validators'
-import { validarIndexPartida, autenticarTime } from './app-validator'
-import { validarSchema } from './app-utils'
-import { autenticarUsuario } from './security/auth-service'
+} from '../schema-validators'
+import { validarIndexPartida, autenticarTime, validarSchema } from '../validator/app-validator'
+import { autenticarUsuario } from '../security/auth-service'
 
 const { checkSchema } = require('express-validator')
 const express = require('express')

@@ -11,12 +11,12 @@ Authorization: eduardoToken
     "data": "2020/05/05",
     "esporte": "Futebol",
     "casa": {
-      "time": "Brasil",
-      "pontuacao": 2
+      "time": "Inter",
+      "pontuacao": 7
     },
     "visitante": {
-      "time": "Japão",
-      "pontuacao": "5"
+      "time": "BrASiL",
+      "pontuacao": "10"
   }
 }
 ###
