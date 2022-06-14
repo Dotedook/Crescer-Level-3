@@ -122,7 +122,6 @@ describe('Testes chamada PUT', () => {
       .set({ Authorization: 'eduardoToken' })
 
     const responseGet = await request(api).get('/partidas')
-    console.log(responseGet.body)
     const { id, ...partidaRecebidaSemId } = responseGet.body[0]
 
     expect(responsePut.status).toBe(statusEsperado)
