@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/app.js",
   "scripts": {
-    "start": "env-cmd -f .env.local nodemon --exec ./node_modules/.bin/babel-node ./src/app.js",
+    "start": "env-cmd -f .env.local nodemon --exec ./node_modules/.bin/babel-node ./src/controller/app.js",
     "test": "jest --coverage ./test",
     "pm2:dev": "env-cmd -f .env.dev pm2-runtime ./build/app.js",
     "pm2:hml": "env-cmd -f .env.hml pm2-runtime ./build/app.js",

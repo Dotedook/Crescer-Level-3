@@ -4,9 +4,9 @@ let partidaPadrao
 let tokenAdmin
 
 beforeEach(() => {
-  const { app } = require('../src/app')
-  const { partidas } = require('../src/app-repository')
-  const { tokenAdmins } = require('../src/app-repository')
+  const { app } = require('../src/controller/app')
+  const { partidas } = require('../src/repository/app-repository')
+  const { tokenAdmins } = require('../src/repository/app-repository')
   partidas.splice(0, partidas.length)
   api = app
   tokenAdmin = tokenAdmins[0]

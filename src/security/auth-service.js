@@ -1,4 +1,4 @@
-import { tokenAdmins } from '../app-repository'
+import { tokenAdmins } from '../repository/app-repository'
 
 export const autenticarUsuario = (req, res, next) => {
   if (!tokenAdmins.includes(req.headers.authorization)) {
