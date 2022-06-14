@@ -1,5 +1,5 @@
 import { partidas } from '../../repository/app-repository'
-import { buscarIndexPartida, calcularResultado } from '../../utils/app-utils'
+import { buscarIndexPartida, calcularResultado, buscarPartidaPorId } from '../../utils/app-utils'
 
 export const editarPartida = (req, res) => {
   const { id } = req.params
