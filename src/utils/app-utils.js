@@ -1,4 +1,4 @@
-import { partidas, tabelas } from '../repository/app-repository'
+import { partidas } from '../repository/app-repository'
 
 export const calcularResultado = partida => {
   const { visitante, casa } = partida
@@ -32,30 +32,4 @@ export const buscarPartidasTimePorEsporte = (nomeTime, esporte) => {
       partida.esporte === esporte
     )
   })
-}
-
-export const buscarIndexTabelaPorEsporte = esportePartida => {
-  const indexTabela = tabelas.findIndex(tabela => tabela.esporte === esportePartida)
-
-  if (indexTabela === -1) {
-    return tabelas.length - 1
-  }
-
-  return indexTabela
-}
-
-export const validacoesTime = {
-  golsFeitos: (partida, nomeTime) =>
-    partida.casa.time === nomeTime ? partida.casa.pontuacao : partida.visitante.pontuacao,
-  golsTomados: (partida, nomeTime) =>
-    partida.casa.time === nomeTime ? partida.visitante.pontuacao : partida.casa.pontuacao,
-  vitorias: (partida, nomeTime) => (partida.vencedor === nomeTime ? 1 : 0),
-  derrotas: (partida, nomeTime) =>
-    partida.vencedor !== null && partida.vencedor !== nomeTime ? 1 : 0,
-  empates: partida => (partida.isEmpate ? 1 : 0),
-}
-
-export const buscarIndexTimeNaTabela = (esporte, nomeTime) => {
-  const indexTabela = buscarIndexTabelaPorEsporte(esporte)
-  return tabelas[indexTabela].times.findIndex(time => time.time === nomeTime)
 }

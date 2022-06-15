@@ -1,6 +1,4 @@
-export const valoresPontuacao = { empate: 1, vitoria: 3, derrota: 0 }
-
-export const valorInicialInformacoesTime = {
+export const VALOR_INICIAL_INFORMACOES_TIME = {
   pontosFeitos: 0,
   pontosTomados: 0,
   vitorias: 0,
@@ -8,9 +6,3 @@ export const valorInicialInformacoesTime = {
   empates: 0,
 }
 
-export const valorInicialTabelaTime = {
-  pontos: 0,
-  vitorias: 0,
-  derrotas: 0,
-  empates: 0,
-}

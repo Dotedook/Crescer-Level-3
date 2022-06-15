@@ -3,7 +3,7 @@ import { validationResult } from 'express-validator'
 
 export const validarSchema = (req, res, next) => {
   const erros = validationResult(req)
-  
+
   if (!erros.isEmpty()) {
     return res.status(400).json({ errors: erros.array() })
   }
@@ -29,6 +29,17 @@ export const autenticarTime = (req, res, next) => {
 
   if (!jogouAlgumaPartida) {
     return res.send(404, 'Não há registros sobre o time informado!')
+  }
+  next()
+}
+
+export const autenticarEsporte = (req, res, next) => {
+  const temEsporte = partidas.some(
+    partida => partida.esporte.toUpperCase() === req.headers.esporte.toUpperCase()
+  )
+
+  if (!temEsporte) {
+    return res.send(404, 'Não há registros sobre o esporte informado!')
   }
   next()
 }
