@@ -9,7 +9,7 @@ Authorization: eduardoToken
 
 {
     "data": "2020/05/05",
-    "esporte": "futebol",
+    "esporte": "volei",
     "casa": {
       "time": "Gremio",
       "pontuacao": 68
