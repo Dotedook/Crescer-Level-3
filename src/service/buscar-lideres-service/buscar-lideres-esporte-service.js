@@ -3,11 +3,13 @@ import { partidas } from '/repository/app-repository'
 
 export const getLideres = (req, res) => {
   const esporte = req.headers.esporte.toUpperCase()
+  const parametroBusca = req.parametroBusca
+
   const partidasEsporte = partidas.filter(partida => partida.esporte.toUpperCase() === esporte)
 
   const nomeTimesEsporte = getNomeTimesEsporte(partidasEsporte)
-  
-  const listaTimesOrdenada = getListaTimesOrdenada(nomeTimesEsporte)
+
+  const listaTimesOrdenada = getListaTimesOrdenada(nomeTimesEsporte, parametroBusca)
 
   res.send(listaTimesOrdenada)
 }
@@ -33,15 +35,19 @@ const getNomeTimesEsporte = partidasEsporte => {
   }, [])
 }
 
-const getListaTimesOrdenada = nomeTimesEsporte => {
-  return nomeTimesEsporte.map(nomeTime => getTimeComInformacoes(nomeTime)).sort(ordenarTime)
+const getListaTimesOrdenada = (nomeTimesEsporte, parametro) => {
+  return nomeTimesEsporte
+    .map(nomeTime => getTimeComInformacoes(nomeTime))
+    .sort((a, b) => {
+      return ordenarTime(a, b, parametro)
+    })
 }
 
-const ordenarTime = (timeA, timeB) => {
-  if (timeA.vitorias > timeB.vitorias) {
+const ordenarTime = (timeA, timeB, parametro) => {
+  if (timeA[`${parametro}`] > timeB[`${parametro}`]) {
     return -1
   }
-  if (timeB.vitorias > timeA.vitorias) {
+  if (timeB[`${parametro}`] > timeA[`${parametro}`]) {
     return 1
   }
   return 0
