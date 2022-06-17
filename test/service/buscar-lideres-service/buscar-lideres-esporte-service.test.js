@@ -29,20 +29,20 @@ describe('Testes buscar lideres por esporte', () => {
     const resultadoEsperado = [
       {
         nome: 'Brasil',
-        partidasJogadas: 2,
-        pontosFeitos: 4,
+        partidasJogadas: 3,
+        pontosFeitos: 6,
         pontosTomados: 0,
-        vitorias: 2,
+        vitorias: 3,
         derrotas: 0,
         empates: 0,
       },
       {
         nome: 'Alemanha',
-        partidasJogadas: 2,
+        partidasJogadas: 3,
         pontosFeitos: 0,
-        pontosTomados: 4,
+        pontosTomados: 6,
         vitorias: 0,
-        derrotas: 2,
+        derrotas: 3,
         empates: 0,
       },
     ]
@@ -57,7 +57,9 @@ describe('Testes buscar lideres por esporte', () => {
       .send(partidaPadraoComEsporteDiferente)
       .set({ Authorization: tokenAdmin })
 
-    const response = await request(api).get('/lideres').set({ esporte: 'Futebol' })
+    const response = await request(api)
+      .get('/lideres')
+      .set({ Authorization: tokenAdmin, esporte: 'Futebol', parametro: 'vitorias' })
 
     expect(response.status).toBe(statusEsperado)
     expect(response.body).toEqual(resultadoEsperado)
@@ -142,8 +144,9 @@ describe('Testes buscar lideres por esporte', () => {
       .send(partidasVariadas[1])
       .set({ Authorization: tokenAdmin })
 
-    const response = await request(api).get('/lideres').set({ esporte: 'Futebol' })
-    console.log(response.body)
+    const response = await request(api)
+      .get('/lideres')
+      .set({ Authorization: tokenAdmin, esporte: 'Futebol', parametro: 'vitorias' })
 
     expect(response.status).toBe(statusEsperado)
     expect(response.body).toEqual(resultadoEsperado)

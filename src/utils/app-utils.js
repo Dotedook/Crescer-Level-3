@@ -38,10 +38,7 @@ export const sanitizarParametroBusca = (req, _, next) => {
   const parametro = req.headers.parametro
 
   const getParametro = parametrosPossiveis[parametro.toUpperCase()]
-
   req.parametroBusca = getParametro()
-
-  console.log(req.parametroBusca)
 
   next()
 }

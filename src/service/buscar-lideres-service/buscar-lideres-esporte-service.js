@@ -2,10 +2,12 @@ import { getTimeComInformacoes } from '../buscar-times-service/buscar-times-serv
 import { partidas } from '/repository/app-repository'
 
 export const getLideres = (req, res) => {
-  const esporte = req.headers.esporte.toUpperCase()
+  const esporte = req.headers.esporte
   const parametroBusca = req.parametroBusca
 
-  const partidasEsporte = partidas.filter(partida => partida.esporte.toUpperCase() === esporte)
+  const partidasEsporte = partidas.filter(
+    partida => partida.esporte.toUpperCase() === esporte.toUpperCase()
+  )
 
   const nomeTimesEsporte = getNomeTimesEsporte(partidasEsporte)
 
