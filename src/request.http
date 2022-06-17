@@ -56,5 +56,6 @@ Authorization: Brasil
 GET http://localhost:3000/lideres HTTP/1.1
 content-type: application/json
 esporte: volei
+parametro: pontosTomadoS
 
 ###

@@ -33,3 +33,36 @@ export const buscarPartidasTimePorEsporte = (nomeTime, esporte) => {
     )
   })
 }
+
+export const sanitizarParametroBusca = (req, _, next) => {
+  const parametro = req.headers.parametro
+
+  const getParametro = parametrosPossiveis[parametro.toUpperCase()]
+
+  req.parametroBusca = getParametro()
+
+  console.log(req.parametroBusca)
+
+  next()
+}
+
+const parametrosPossiveis = {
+  PARTIDASJOGADAS() {
+    return 'partidasJogadas'
+  },
+  PONTOSFEITOS() {
+    return 'pontosFeitos'
+  },
+  PONTOSTOMADOS() {
+    return 'pontosTomados'
+  },
+  VITORIAS() {
+    return 'vitorias'
+  },
+  DERROTAS() {
+    return 'derrotas'
+  },
+  EMPATES() {
+    return 'empates'
+  },
+}

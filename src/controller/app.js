@@ -20,6 +20,7 @@ import {
   criarPartida,
 } from '/service'
 import { autenticarUsuario } from '../security/auth-service'
+import { sanitizarParametroBusca } from '/utils/app-utils'
 
 const { checkSchema } = require('express-validator')
 const express = require('express')
@@ -30,7 +31,7 @@ const fluxoBuscarPartidas = [getPartidas]
 
 const fluxoBuscarTime = [validarSchema, autenticarTime, getTime]
 
-const fluxoBuscarLideres = [validarSchema, autenticarEsporte, getLideres]
+const fluxoBuscarLideres = [validarSchema, autenticarEsporte, sanitizarParametroBusca, getLideres]
 
 const fluxoCriarPartida = [validarSchema, autenticarUsuario, criarPartida]
 
