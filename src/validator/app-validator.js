@@ -41,5 +41,6 @@ export const autenticarEsporte = (req, res, next) => {
   if (!temEsporte) {
     return res.send(404, 'Não há registros sobre o esporte informado!')
   }
+  
   next()
 }

@@ -152,4 +152,246 @@ describe('Testes buscar lideres por esporte', () => {
     expect(response.body).toEqual(resultadoEsperado)
     expect(response.body.length).toBe(tamanhoEsperado)
   })
+
+  test('Deve retornar erro quando não houver registros do esporte informado', async () => {
+    const statusEsperado = 404
+    const mensagemEsperada = 'Não há registros sobre o esporte informado!'
+
+    await request(api).post('/partidas').send(partidaPadrao).set({ Authorization: tokenAdmin })
+
+    const response = await request(api)
+      .get('/lideres')
+      .set({ Authorization: tokenAdmin, esporte: 'volei', parametro: 'vitorias' })
+
+    expect(response.status).toBe(statusEsperado)
+    expect(response.text).toEqual(mensagemEsperada)
+  })
+
+  test('Deve retornar erro quando não o parametro for informado errado', async () => {
+    const statusEsperado = 400
+    const mensagemEsperada = 'Você informou um parametro errado.'
+
+    await request(api).post('/partidas').send(partidaPadrao).set({ Authorization: tokenAdmin })
+
+    const response = await request(api)
+      .get('/lideres')
+      .set({ Authorization: tokenAdmin, esporte: 'futebol', parametro: 'parametroErrado' })
+
+    expect(response.status).toBe(statusEsperado)
+    expect(response.text).toEqual(mensagemEsperada)
+  })
+
+  test('Deve retornar os times ordenados pela derrota corretamente', async () => {
+    const resultadoEsperado = [
+      {
+        nome: 'Alemanha',
+        partidasJogadas: 2,
+        pontosFeitos: 0,
+        pontosTomados: 4,
+        vitorias: 0,
+        derrotas: 2,
+        empates: 0,
+      },
+      {
+        nome: 'Brasil',
+        partidasJogadas: 2,
+        pontosFeitos: 4,
+        pontosTomados: 0,
+        vitorias: 2,
+        derrotas: 0,
+        empates: 0,
+      },
+    ]
+    const statusEsperado = 200
+
+    await request(api).post('/partidas').send(partidaPadrao).set({ Authorization: tokenAdmin })
+    await request(api).post('/partidas').send(partidaPadrao).set({ Authorization: tokenAdmin })
+
+    const response = await request(api)
+      .get('/lideres')
+      .set({ Authorization: tokenAdmin, esporte: 'futebol', parametro: 'derrotas' })
+
+    expect(response.status).toBe(statusEsperado)
+    expect(response.body).toEqual(resultadoEsperado)
+  })
+
+  test('Deve retornar os times ordenados pela partidas Jogadas corretamente', async () => {
+    const novaPartida = {
+      data: '2020/05/05',
+      esporte: 'Futebol',
+      casa: {
+        time: 'Brasil',
+        pontuacao: 2,
+      },
+      visitante: {
+        time: 'Argentina',
+        pontuacao: 0,
+      },
+    }
+    const resultadoEsperado = [
+      {
+        nome: 'Brasil',
+        partidasJogadas: 2,
+        pontosFeitos: 4,
+        pontosTomados: 0,
+        vitorias: 2,
+        derrotas: 0,
+        empates: 0,
+      },
+      {
+        nome: 'Alemanha',
+        partidasJogadas: 1,
+        pontosFeitos: 0,
+        pontosTomados: 2,
+        vitorias: 0,
+        derrotas: 1,
+        empates: 0,
+      },
+      {
+        nome: 'Argentina',
+        partidasJogadas: 1,
+        pontosFeitos: 0,
+        pontosTomados: 2,
+        vitorias: 0,
+        derrotas: 1,
+        empates: 0,
+      },
+    ]
+
+    const statusEsperado = 200
+
+    await request(api).post('/partidas').send(partidaPadrao).set({ Authorization: tokenAdmin })
+    await request(api).post('/partidas').send(novaPartida).set({ Authorization: tokenAdmin })
+
+    const response = await request(api)
+      .get('/lideres')
+      .set({ Authorization: tokenAdmin, esporte: 'futebol', parametro: 'partidasJogadas' })
+
+    expect(response.status).toBe(statusEsperado)
+    expect(response.body).toEqual(resultadoEsperado)
+  })
+
+  test('Deve retornar os times ordenados pelos pontos feitos corretamente', async () => {
+    const resultadoEsperado = [
+      {
+        nome: 'Brasil',
+        partidasJogadas: 2,
+        pontosFeitos: 4,
+        pontosTomados: 0,
+        vitorias: 2,
+        derrotas: 0,
+        empates: 0,
+      },
+      {
+        nome: 'Alemanha',
+        partidasJogadas: 2,
+        pontosFeitos: 0,
+        pontosTomados: 4,
+        vitorias: 0,
+        derrotas: 2,
+        empates: 0,
+      },
+    ]
+    const statusEsperado = 200
+
+    await request(api).post('/partidas').send(partidaPadrao).set({ Authorization: tokenAdmin })
+    await request(api).post('/partidas').send(partidaPadrao).set({ Authorization: tokenAdmin })
+
+    const response = await request(api)
+      .get('/lideres')
+      .set({ Authorization: tokenAdmin, esporte: 'futebol', parametro: 'pontosFeitos' })
+
+    expect(response.status).toBe(statusEsperado)
+    expect(response.body).toEqual(resultadoEsperado)
+  })
+
+  test('Deve retornar os times ordenados pelos pontos Tomados corretamente', async () => {
+    const resultadoEsperado = [
+      {
+        nome: 'Alemanha',
+        partidasJogadas: 2,
+        pontosFeitos: 0,
+        pontosTomados: 4,
+        vitorias: 0,
+        derrotas: 2,
+        empates: 0,
+      },
+      {
+        nome: 'Brasil',
+        partidasJogadas: 2,
+        pontosFeitos: 4,
+        pontosTomados: 0,
+        vitorias: 2,
+        derrotas: 0,
+        empates: 0,
+      },
+    ]
+    const statusEsperado = 200
+
+    await request(api).post('/partidas').send(partidaPadrao).set({ Authorization: tokenAdmin })
+    await request(api).post('/partidas').send(partidaPadrao).set({ Authorization: tokenAdmin })
+
+    const response = await request(api)
+      .get('/lideres')
+      .set({ Authorization: tokenAdmin, esporte: 'futebol', parametro: 'pontosTomados' })
+
+    expect(response.status).toBe(statusEsperado)
+    expect(response.body).toEqual(resultadoEsperado)
+  })
+
+  test('Deve retornar os times ordenados pela partidas Jogadas corretamente', async () => {
+    const novaPartida = {
+      data: '2020/05/05',
+      esporte: 'Futebol',
+      casa: {
+        time: 'Brasil',
+        pontuacao: 2,
+      },
+      visitante: {
+        time: 'Argentina',
+        pontuacao: 2,
+      },
+    }
+    const resultadoEsperado = [
+      {
+        nome: 'Brasil',
+        partidasJogadas: 2,
+        pontosFeitos: 4,
+        pontosTomados: 2,
+        vitorias: 1,
+        derrotas: 0,
+        empates: 1,
+      },
+      {
+        nome: 'Argentina',
+        partidasJogadas: 1,
+        pontosFeitos: 2,
+        pontosTomados: 2,
+        vitorias: 0,
+        derrotas: 0,
+        empates: 1,
+      },
+      {
+        nome: 'Alemanha',
+        partidasJogadas: 1,
+        pontosFeitos: 0,
+        pontosTomados: 2,
+        vitorias: 0,
+        derrotas: 1,
+        empates: 0,
+      },
+    ]
+
+    const statusEsperado = 200
+
+    await request(api).post('/partidas').send(partidaPadrao).set({ Authorization: tokenAdmin })
+    await request(api).post('/partidas').send(novaPartida).set({ Authorization: tokenAdmin })
+
+    const response = await request(api)
+      .get('/lideres')
+      .set({ Authorization: tokenAdmin, esporte: 'futebol', parametro: 'empates' })
+
+    expect(response.status).toBe(statusEsperado)
+    expect(response.body).toEqual(resultadoEsperado)
+  })
 })

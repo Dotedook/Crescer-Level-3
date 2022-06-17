@@ -25,19 +25,15 @@ export const buscarIndexPartida = id => {
   return partidas.findIndex(partida => id === partida.id)
 }
 
-export const buscarPartidasTimePorEsporte = (nomeTime, esporte) => {
-  return partidas.filter(partida => {
-    return (
-      (partida.casa.time === nomeTime || partida.visitante.time === nomeTime) &&
-      partida.esporte === esporte
-    )
-  })
-}
-
-export const sanitizarParametroBusca = (req, _, next) => {
+export const sanitizarParametroBusca = (req, res, next) => {
   const parametro = req.headers.parametro
 
   const getParametro = parametrosPossiveis[parametro.toUpperCase()]
+
+  if (!getParametro) {
+    return res.status(400).send('Você informou um parametro errado.')
+  }
+
   req.parametroBusca = getParametro()
 
   next()
